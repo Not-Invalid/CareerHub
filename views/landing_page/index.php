@@ -12,11 +12,28 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="assets/vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/sweetalert2.min.css" rel="stylesheet">
+    <script src="assets/js/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
     <?php include 'layout/navbar.php'?>
 
+    <?php if (isset($_GET['status'])): ?>
+        <?php 
+            if ($_GET['status'] == 'logout') {
+                echo '<script>
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Logout Berhasil",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        </script>';
+            } 
+        ?>
+    <?php endif;?>
     <div class="container-fluid pt-5 bg-primary header-header mb-5" id="home">
         <div class="container pt-5" >
             <div class="row g-5 pt-5">
@@ -38,7 +55,7 @@
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="about-img">
-                        <img class="img-fluid" src="assets/img/Asset1.png">
+                        <img class="img-fluid" src="assets/img/ch_logo_secondary.png">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" >

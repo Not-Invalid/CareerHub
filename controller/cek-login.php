@@ -17,13 +17,13 @@ if ($cek > 0) {
     $_SESSION['login_success'] = true;
 
     if ($user['id_role'] == 1) {
-        header("location: ../views/admin/index.php");
+        header("location: ../views/admin/index.php?status=suksesLogin");
     } else {
-        header("location: ../views/user/index.php");
+        header("location: ../views/user/index.php?status=suksesLogin");
     }
     exit();
 } else {
-    header("location:../index.php?pesan=gagal");
+    header("location:../partials/login.php?status=gagalLogin");
     exit();
 }
 ?>

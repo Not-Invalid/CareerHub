@@ -1,0 +1,203 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    background: #1d2634;
+}
+
+.row {
+    background-color: #1d2634;
+    justify-content: center;
+}
+
+body {
+    font-family: montserrat, arial, verdana;
+}
+
+label {
+    float: left;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+form {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+form fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 10%;
+    position: relative;
+}
+
+form fieldset:not(:first-of-type) {
+    display: none;
+}
+
+form input,
+form select,
+form textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
+form input:focus, form select:focus,
+form textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #3259c2;
+    outline-width: 0;
+    transition: All 0.5s ease-in;
+    -webkit-transition: All 0.5s ease-in;
+    -moz-transition: All 0.5s ease-in;
+    -o-transition: All 0.5s ease-in;
+}
+
+form .action-button {
+    width: 100px;
+    background: #3259c2;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+form .action-button:hover,
+form .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #3259c2;
+}
+
+form .action-button-previous {
+    width: 100px;
+    background: #4f5d75;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+form .action-button-previous:hover,
+form .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+}
+
+.fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    counter-reset: step;
+}
+
+#progressbar li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 10px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 24px;
+    height: 24px;
+    line-height: 26px;
+    display: block;
+    font-size: 12px;
+    color: #333;
+    background: white;
+    border-radius: 25px;
+    margin: 0 auto 10px auto;
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: white;
+    position: absolute;
+    right: 109px;
+    top: 50%;
+    transform: translateY(-150%);
+    z-index: -1;
+}
+
+
+#progressbar li:first-child:after {
+    content: none;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #3259c2;
+    color: white;
+}
+
+.dme_link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.dme_link a {
+    background: #FFF;
+    font-weight: bold;
+    color: #3259c2;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 5px 25px;
+    font-size: 12px;
+}
+
+.dme_link a:hover,
+.dme_link a:focus {
+    background: #C5C5F1;
+    text-decoration: none;
+}

@@ -26,6 +26,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
         $nama_jurusan = $data['nama_jurusan'];
         $nama_kelas = $data['nama_kelas'];
         $tujuan_karir = $data['tujuan_karir'];
+        $status_persetujuan = $data['status_persetujuan'];
     }
 }
 
@@ -39,15 +40,26 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../.././assets/css/user/datadiri.css">
     <link rel="stylesheet" href="../.././assets/css/sidebar.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../.././assets/css/sweetalert2.min.css">
+    <script src="../.././assets/js/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>CareerHub</title>
 </head>
 <body>
     <div class="container">
-        <header>Data Diri</header>
+        <header>Data Diri
+            <?php if ($data_exists): ?>
+            <span class="status-container <?php echo $status_persetujuan == 1 ? 'status-approved' : 'status-not-approved'; ?>">
+                <span class="status-indicator"></span>
+                <span class="status-text">
+                    <?php echo $status_persetujuan == 1 ? 'Approved' : 'Not Approved'; ?>
+                </span>
+            </span>
+            <?php endif; ?>
+        </header>
 
         <?php if ($data_exists): ?>
-        <form action="#">
+        <form>
             <div class="form first">
                 <div class="details personal">
                     <div class="fields">
@@ -105,7 +117,6 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
                             <span class="btnText">Ubah Data</span>
                             <i class="fas fa-pen-to-square"></i>
                         </a>
-
                         <a href="data_nilai.php" class="navBtn">
                             <span class="btnText">Data Nilai</span>
                             <i class="fas fa-chevron-right"></i>
@@ -124,6 +135,36 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
         <?php endif; ?>
 
     <script src="../.././assets/js/sidebar.js"></script>
+    <?php if (isset($_GET['status'])): ?>
+            <?php 
+                if (isset($_GET['status'])) {
+                    if ($_GET['status'] == 'Sukses') {
+                        echo '<script>
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Data berhasil ditambahkan",
+                                    text: "Menunggu Persetujuan",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                              </script>';
+                    } 
+                    if ($_GET['status'] == 'ubah') {
+                        echo '<script>
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Data berhasil diubah",
+                                    text: "Menunggu Persetujuan",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                              </script>';
+                    } 
+                }
+            ?>
+    <?php endif;?>
     
 </body>
 </html>

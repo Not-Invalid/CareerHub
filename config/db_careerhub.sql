@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2024 at 01:53 PM
+-- Generation Time: May 19, 2024 at 04:27 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,7 +39,6 @@ CREATE TABLE `jurusan` (
 INSERT INTO `jurusan` (`kode_jurusan`, `nama_jurusan`) VALUES
 ('L', 'Teknik Listrik'),
 ('M', 'Mesin'),
-('OTO', 'Teknik Otomasi'),
 ('RPL', 'Rekayasa perangkat Lunak');
 
 -- --------------------------------------------------------
@@ -79,8 +78,9 @@ CREATE TABLE `kelas` (
 
 INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
 (1, 'XI RPL 2'),
-(2, 'X Mesin 2'),
-(3, 'XI Listrik 2');
+(3, 'XI Listrik 2'),
+(4, 'XI MESIN 3'),
+(5, 'X RPL 2');
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,12 @@ CREATE TABLE `nilai_semester` (
 --
 
 INSERT INTO `nilai_semester` (`id_nilai_semester`, `nisn`, `nilai_semester_1`, `nilai_semester_2`, `nilai_semester_3`, `nilai_semester_4`, `nilai_semester_5`, `nilai_semester_6`) VALUES
-(2, '909', 74.9, 78.9, 85.9, 87.67, 76.43, 93.56);
+(2, '909', 74.9, 78.9, 85, 87.67, 76.43, 93.56),
+(7, '191', 78, 79, 88.9, 65.8, 90.8, 99.2),
+(8, '92', 90, 88, 79.8, 90.4, 86.7, 90),
+(9, '85191', 78, 89, 77, 90, 67, 98.6),
+(10, '0098912', 90, 88, 78, 28, 78, 66.9),
+(11, '112', 78, 80.67, 98, 70, 80, 76.8);
 
 -- --------------------------------------------------------
 
@@ -133,7 +138,6 @@ INSERT INTO `role` (`id_role`, `nama_role`) VALUES
 
 CREATE TABLE `siswa` (
   `nisn` varchar(10) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `nama_siswa` varchar(255) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `jenis_kelamin` varchar(15) NOT NULL,
@@ -149,10 +153,14 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`nisn`, `id_user`, `nama_siswa`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `no_telp`, `kode_jurusan`, `id_kelas`, `id_karir`, `status_persetujuan`) VALUES
-('85191', 3, 'yono', '2024-03-31', 'Laki Laki', 'jl hj', '71626', 'L', 3, 4, 1),
-('909', 2, 'h', '2024-03-19', 'Laki Laki', 'hu', '890', 'RPL', 1, 3, 0),
-('988', 2, 'rt', '2024-03-19', 'Perempuan', 'di', '0918172', 'M', 2, 5, 0);
+INSERT INTO `siswa` (`nisn`, `nama_siswa`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `no_telp`, `kode_jurusan`, `id_kelas`, `id_karir`, `status_persetujuan`) VALUES
+('0098912', 'Vitor Serundeng', '2024-05-06', 'Laki Laki', 'jalan', '099282', 'M', 4, 3, 0),
+('112', 'Boy', '2024-05-28', 'Laki Laki', 'Jl Veter', '90923013', 'L', 3, 5, 0),
+('191', 'Wisnu', '2024-05-19', 'Laki-Laki', 'jl merdeka', '827828711', 'RPL', 1, 3, 0),
+('85191', 'baloy', '2024-03-31', 'Laki Laki', 'jl aj', '71626', 'M', 1, 4, 0),
+('909', 'Bayu', '2024-03-20', 'Laki Laki', 'Jl', '91882900', 'L', 3, 4, 0),
+('92', 'Algi', '2006-10-25', 'Laki Laki', 'jl merdeka', '0982661', 'M', 3, 5, 1),
+('97', 'kabdul', '2024-05-02', 'perempuan', 'jl kali', '089677987654', 'RPL', 5, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -162,22 +170,24 @@ INSERT INTO `siswa` (`nisn`, `id_user`, `nama_siswa`, `tanggal_lahir`, `jenis_ke
 
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
-  `email` varchar(256) NOT NULL,
   `nisn` varchar(10) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `id_role` int(11) NOT NULL,
-  `id_kelas` int(11) NOT NULL
+  `id_role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `email`, `nisn`, `password`, `id_role`, `id_kelas`) VALUES
-(1, 'admin@admin.com', 'Admin', 'admin', 1, 0),
-(2, 'user@user.com', '85191', 'user', 2, 1),
-(4, 'user@gmail.com', '909', 'test', 2, 2),
-(5, 'ser@ser.com', '191', 'uhuy', 2, 3);
+INSERT INTO `users` (`id_user`, `nisn`, `password`, `id_role`) VALUES
+(1, 'Admin', 'admin', 1),
+(2, '85191', 'user', 2),
+(4, '909', 'test', 2),
+(5, '191', 'uhuy', 2),
+(10, '92', '40', 2),
+(12, '112', '123', 2),
+(14, '97', 'aku', 2),
+(15, '0098912', '221', 2);
 
 --
 -- Indexes for dumped tables
@@ -219,7 +229,6 @@ ALTER TABLE `role`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`nisn`),
-  ADD KEY `id_user` (`id_user`),
   ADD KEY `id_karir` (`id_karir`),
   ADD KEY `kode_jurusan` (`kode_jurusan`) USING BTREE,
   ADD KEY `id_kelas` (`id_kelas`);
@@ -229,8 +238,7 @@ ALTER TABLE `siswa`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
-  ADD KEY `id_role` (`id_role`),
-  ADD KEY `id_kelas` (`id_kelas`);
+  ADD KEY `id_role` (`id_role`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -240,25 +248,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `karir`
 --
 ALTER TABLE `karir`
-  MODIFY `id_karir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_karir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nilai_semester`
 --
 ALTER TABLE `nilai_semester`
-  MODIFY `id_nilai_semester` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_nilai_semester` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <title>CareerHub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../assets/css/sweetalert2.min.css">
+  <script src="../assets/js/sweetalert2.all.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -22,7 +24,7 @@
     <nav class="nav">
       <div>
         <a href="../../views/admin/index.php" class="nav_logo">
-          <img src="../../assets/img/Asset1.png" class="nav_logo-img">
+          <img src="../../assets/img/ch_logo.png" class="nav_logo-img">
           <span class="nav_logo-name">CareerHub</span>
         </a>
         <div class="nav_list">
@@ -52,12 +54,30 @@
           </a>
         </div>
       </div>
-      <a href="../../controller/logout.php" class="nav_link">
+      <a href="#" onclick="logout()" class="nav_link">
         <i class='fas fa-sign-out-alt nav_icon'></i>
         <span class="nav_name">Logout</span>
       </a>
     </nav>
   </div>
+
+  <script>
+    function logout() {
+      Swal.fire({
+        title: 'Konfirmasi Logout',
+        text: 'Anda yakin ingin keluar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Logout',
+        cancelButtonText: 'Batal',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '../../controller/logout.php';
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

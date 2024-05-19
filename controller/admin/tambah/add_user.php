@@ -4,7 +4,7 @@ if (isset($_POST['tambah'])) {
     $id_user = $_POST['id_user'];
     $nisn = $_POST['nisn'];
     $password = $_POST['password'];
-    $id__role = $_POST['id_role'];
+    $id_role = $_POST['id_role'];
 
     $query = mysqli_query($koneksi, "INSERT INTO users (id_user, nisn, password, id_role) 
     VALUES ('$id_user','$nisn','$password','$id_role')");

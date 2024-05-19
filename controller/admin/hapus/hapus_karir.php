@@ -5,9 +5,9 @@ if (isset($_GET['id'])) {
     $query = mysqli_query($koneksi, "DELETE FROM karir WHERE id_karir = '$id_karir'");
 
     if ($query) {
-        header ('location:../../../views/admin/karir.php?status=delete');
+        header ('location:../../../views/admin/karir.php?status=terhapus');
     }else{
-       die ("gagal menghapus");
+        header ('location:../../../views/admin/karir.php?status=gagalhapus');
     }
 }else{
     die ("akses dilarang");

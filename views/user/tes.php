@@ -35,7 +35,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../.././assets/css/user/ubah_data_diri.css">
+    <link rel="stylesheet" href="../.././assets/css/user/ubahdd.css">
     <link rel="stylesheet" href="../.././assets/vendor/css/bootstrap.min.css">    
 
 </head>
@@ -43,7 +43,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
 <body>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form id="form" action="../.././controller/user/ubah/ubah_data_diri.php" method="post">
+            <form id="msform">
                 <ul id="progressbar">
                     <li class="active"></li>
                     <li></li>
@@ -53,27 +53,27 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
                     <h2 class="fs-title">Data Diri</h2>
                     <h3 class="fs-subtitle">Isi Data Diri Dengan Baik dan Benar</h3>
                     <label>NISN</label>
-                    <input type="text" name="nisn" value="<?php echo $nisn; ?>" readonly/>
+                    <input type="text" name="nisn" value="<?php echo $nisn; ?>" />
                     <label>Nama Siswa</label>
                     <input type="text" name="nama_siswa" value="<?php echo $nama_siswa; ?>"  />
                     <label>Tanggal Lahir</label>
                     <input type="date" name="tanggal_lahir" value="<?php echo $tanggal_lahir; ?>"  />
-                    <input type="button" name="next" class="next action-button" value="Selanjutnya" />
+                    <input type="button" name="next" class="next action-button" value="Next" />
                 </fieldset>
                 <fieldset>
                     <h2 class="fs-title">Data Diri</h2>
                     <h3 class="fs-subtitle">Isi Data Diri Dengan Baik dan Benar</h3>
                     <label>Jenis Kelamin</label>
-                    <select name="jenis_kelamin">
-                        <option value="Laki Laki" <?php echo ($jenis_kelamin == 'Laki Laki') ? 'selected' : ''; ?>>Laki Laki</option>
-                        <option value="Perempuan" <?php echo ($jenis_kelamin == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
+                    <select>
+                        <option value="Laki Laki"> Laki Laki</option>
+                        <option value="Perempuan"> Perempuan</option>
                     </select>
                     <label>Alamat</label>
                     <input type="text" name="alamat" value="<?php echo $alamat; ?>"  />
                     <label>No Telepon</label>
                     <input type="text" name="no_telp" value="<?php echo $no_telp; ?>"  />
-                    <input type="button" name="previous" class="previous action-button-previous" value="Sebelumnya" />
-                    <input type="button" name="next" class="next action-button" value="Selanjutnya" />
+                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    <input type="button" name="next" class="next action-button" value="Next" />
                 </fieldset>
                 <fieldset>
                     <h2 class="fs-title">Data Diri</h2>
@@ -81,42 +81,41 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
                     <label>Jurusan</label>
                     <select name="kode_jurusan" id="kode_jurusan">
                         <?php
-                        include '../../../config/koneksi.php';
-                        $query_jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
-                        while($data_jurusan = mysqli_fetch_array($query_jurusan)) {
-                            $selected = ($data_jurusan['kode_jurusan'] == $data['kode_jurusan']) ? 'selected' : '';
+                            include '../../../config/koneksi.php';
+                            $query = mysqli_query($koneksi, "SELECT * FROM jurusan");
+                            while($data = mysqli_fetch_array($query)) {
                         ?>
-                        <option value="<?=$data_jurusan['kode_jurusan'];?>" <?php echo $selected; ?>><?php echo $data_jurusan['nama_jurusan'];?></option>
-                        <?php
-                        }
+                            <option value="<?=$data['kode_jurusan'];?>"><?php echo $data['nama_jurusan'];?></option>
+                            <?php
+                            }
                         ?>
                     </select>
                     <label>Kelas</label>
                     <select name="id_kelas" id="id_kelas">
                         <?php
-                        $query_kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
-                        while($data_kelas = mysqli_fetch_array($query_kelas)) {
-                            $selected = ($data_kelas['id_kelas'] == $data['id_kelas']) ? 'selected' : '';
+                            include '../../../config/koneksi.php';
+                            $query = mysqli_query($koneksi, "SELECT * FROM kelas");
+                            while($data = mysqli_fetch_array($query)) {
                         ?>
-                        <option value="<?=$data_kelas['id_kelas'];?>" <?php echo $selected; ?>><?php echo $data_kelas['nama_kelas'];?></option>
-                        <?php
-                        }
+                            <option value="<?=$data['id_kelas'];?>"><?php echo $data['nama_kelas'];?></option>
+                            <?php
+                            }
                         ?>
                     </select>
                     <label>Tujuan Karir</label>
                     <select name="id_karir" id="id_karir">
                         <?php
-                        $query_karir = mysqli_query($koneksi, "SELECT * FROM karir");
-                        while($data_karir = mysqli_fetch_array($query_karir)) {
-                            $selected = ($data_karir['id_karir'] == $data['id_karir']) ? 'selected' : '';
+                            include '../../../config/koneksi.php';
+                            $query = mysqli_query($koneksi, "SELECT * FROM karir");
+                            while($data = mysqli_fetch_array($query)) {
                         ?>
-                        <option value="<?=$data_karir['id_karir'];?>" <?php echo $selected; ?>><?php echo $data_karir['tujuan_karir'];?></option>
-                        <?php
-                        }
+                            <option value="<?=$data['id_karir'];?>"><?php echo $data['tujuan_karir'];?></option>
+                            <?php
+                            }
                         ?>
                     </select>
-                    <input type="button" name="previous" class="previous action-button-previous" value="Sebelumnya" />
-                    <input type="submit" value="Simpan Data" class="submit action-button" name="ubah">
+                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    <input type="submit" name="submit" class="submit action-button" value="Submit" />
                 </fieldset>
             </form>
         </div>
@@ -199,6 +198,9 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
         });
     });
 
+    $(".submit").click(function() {
+        return false;
+    })
     </script>
 </body>
 </html>

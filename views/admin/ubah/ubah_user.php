@@ -1,13 +1,12 @@
 <?php
 include '../../../config/koneksi.php';
-include '../../../layout/sidebar.php';
 
 if (isset($_GET['id'])) {
     $id_user = $_GET['id'];
     $query = mysqli_query($koneksi,"SELECT * FROM users WHERE id_user='$id_user'");
     while ($data = mysqli_fetch_array($query)) {
         $id_user = $data['id_user'];
-        $email = $data['email'];
+        $nisn = $data['nisn'];
         $password = $data['password'];
     }
 }
@@ -20,7 +19,8 @@ if (isset($_GET['id'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CareerHub | Ubah User</title>
         <link rel="stylesheet" href="../../.././assets/css/admin/form.css">
-        <link rel="stylesheet" href="../../.././assets/css/sidebar.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     </head>
     <body>
       <div class="row">
@@ -30,12 +30,14 @@ if (isset($_GET['id'])) {
         
         <fieldset>
         
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" value="<?php echo $email; ?>" readonly>
+          <label for="nisn">NISN</label>
+          <input type="text" id="nisn" name="nisn" value="<?php echo $nisn; ?>" readonly>
 
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" value="<?php echo $password; ?>" readonly>
-
+          <div class="password-input">
+                    <input type="password" id="password" name="password" value="<?php echo $password; ?>" readonly>
+                    <i id="password-toggle-icon" class="fas fa-eye-slash toggle-password" onclick="togglePassword()"></i>
+                </div>
           <label for="nama_role">Roles</label>
                 <select name="id_role" id="id_role">
                     <?php
@@ -56,6 +58,20 @@ if (isset($_GET['id'])) {
        </form>
         </div>
       </div>
-      
+          <script>
+    function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        var passwordIcon = document.getElementById("password-toggle-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove("fa-eye-slash");
+            passwordIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("fa-eye");
+            passwordIcon.classList.add("fa-eye-slash");
+        }
+    }
+    </script>
     </body>
 </html>

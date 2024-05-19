@@ -10,9 +10,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-   background-color: #1d2634;
+    background-color: #1d2634;
 }
-
 .container{
     position: relative;
     max-width: 900px;
@@ -42,14 +41,34 @@ body{
     border-radius: 8px;
     background-color: #4070f4;
 }
+.status-container {
+    display: flex;
+    align-items: center;
+}
+.status-indicator {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.status-approved .status-indicator {
+    background-color: green;
+}
+.status-not-approved .status-indicator {
+    background-color: red;
+}
+.status-text {
+    font-size: 14px;
+}
 .container form{
     position: relative;
     margin-top: 16px;
-    height: 360px;
+    height: 340px;
     background-color: #fff;
     overflow: hidden;
 }
- .no-data-message{
+.no-data-message{
     position: relative;
     margin-top: 16px;
     min-height: 100px;
@@ -170,47 +189,17 @@ form .buttons button , .navBtn, .sendBtn, .backBtn{
 .backBtn {
     margin-top: 2px;
 }
-.charts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 50px 20px 50px;
-  }
-  
-  .charts-card {
-    background-color: #F2F2F2;
-    margin-bottom: 20px;
-    padding: 25px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
-  }
-  
-  canvas {
-    width: 680px;
-    height: 120px;
-  }
-  .chart-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1d2634;
-    font-weight: 700;
-  }
 @media screen and (max-width: 768px) {
     .container form{
         overflow-y: scroll;
     }
     .container form::-webkit-scrollbar{
-       display: none;
+        display: none;
     }
     form .fields .input-field{
         width: calc(100% / 2 - 15px);
     }
-
 }
-
 @media screen and (max-width: 576px) {
     form .fields .input-field{
         width: 100%;

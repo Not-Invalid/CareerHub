@@ -27,15 +27,48 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
 }
 ?>
 
+<?php if (isset($_GET['status'])): ?>
+            <?php 
+                if (isset($_GET['status'])) {
+                    if ($_GET['status'] == 'Sukses') {
+                        echo '<script>
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Data berhasil ditambahkan",
+                                    text: "Menunggu Persetujuan",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                              </script>';
+                    } 
+                    if ($_GET['status'] == 'ubah') {
+                        echo '<script>
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Data berhasil diubah",
+                                    text: "Menunggu Persetujuan",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                              </script>';
+                    } 
+                }
+            ?>
+        <?php endif;?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../.././assets/css/user/dataNilai.css">
+    <link rel="stylesheet" href="../.././assets/css/user/datanilai.css">
     <link rel="stylesheet" href="../.././assets/css/sidebar.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../.././assets/css/sweetalert2.min.css">
+    <script src="../.././assets/js/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>CareerHub</title>
 </head>
 <body>
@@ -46,7 +79,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
             <?php if (!$nilai_semester_exists): ?>
                 <div class="no-data-message">
                     <p>Kamu belum mengisi data nilai. Isi data sekarang!</p>
-                    <button onclick="location.href='tambah/tambah_data_nilai.php'" class="navBtn">Tambah Data</button>
+                    <button onclick="location.href='tambah_data_nilai.php'" class="navBtn">Tambah Data</button>
                 </div>
             <?php else: ?>
                 <form action="#" class="form_nilai">
@@ -166,6 +199,6 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
         }
     });
     </script>
-    
+
 </body>
 </html> 

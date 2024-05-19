@@ -10,10 +10,10 @@ if (isset($_GET['search'])) {
     $search = $_GET['search'];
     $countQuery = "SELECT COUNT(*) as total FROM users
                    LEFT JOIN role ON users.id_role = role.id_role
-                   WHERE users.id_user LIKE '%$search%' OR users.email LIKE '%$search%'";
+                   WHERE users.id_user LIKE '%$search%' OR users.nisn LIKE '%$search%'";
     $sql = "SELECT users.*, role.nama_role FROM users
             LEFT JOIN role ON users.id_role = role.id_role
-            WHERE users.id_user LIKE '%$search%' OR users.email LIKE '%$search%'
+            WHERE users.id_user LIKE '%$search%' OR users.nisn LIKE '%$search%'
             LIMIT $start, $entriesPerPage";
 } else {
     $countQuery = "SELECT COUNT(*) as total FROM users
@@ -65,41 +65,58 @@ $query = mysqli_query($koneksi, $sql);
         </div>
         <?php if (isset($_GET['status'])): ?>
             <?php 
-        if (isset($_GET['status'])) {
-        if ($_GET['status'] == 'Sukses') {
-        echo '<script>
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Data berhasil ditambahkan",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-              </script>';
-        } 
-        if ($_GET['status'] == 'ubah') {
-            echo '<script>
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Data berhasil diubah",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                  </script>';
-            } 
-            if ($_GET['status'] == 'delete') {
-                echo "<script>alert('Apakah anda yakin ingin menghapus?');</script>";
-            }
-}
-?>
-            <?php endif;?>
+                if ($_GET['status'] == 'Sukses') {
+                    echo '<script>
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Data berhasil ditambahkan",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                          </script>';
+                } 
+                if ($_GET['status'] == 'ubah') {
+                    echo '<script>
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Data berhasil diubah",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                          </script>';
+                } 
+                if ($_GET['status'] == 'terhapus') {
+                    echo '<script>
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Data berhasil dihapus",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                          </script>';
+                }
+                if ($_GET['status'] == 'gagalhapus') {
+                    echo '<script>
+                            Swal.fire({
+                                position: "center",
+                                icon: "error",
+                                title: "Data gagal dihapus",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                          </script>';
+                }
+            ?>
+        <?php endif;?>
     </header>
     <table>
         <thead>
             <tr class="heading">
                 <th>No</th>
-                <th>Email</th>
+                <th>NISN</th>
                 <th>Roles</th>
                 <th>Aksi</th>
             </tr>
@@ -110,11 +127,11 @@ $query = mysqli_query($koneksi, $sql);
             while ($data = mysqli_fetch_array($query)) {
                 echo "<tr>";
                 echo "<td>" . $no . "</td>";
-                echo "<td>" . $data['email'] . "</td>";
+                echo "<td>" . $data['nisn'] . "</td>";
                 echo "<td>" . $data['nama_role'] . "</td>";
                 echo "<td width = '160'>";
                 echo "<a class='btn btn-ubah btn-sm ' href='ubah/ubah_user.php?id=".$data['id_user']."'> <i class='fa-solid fa-pen-to-square fs-6'></i></a> ";
-                echo "<a class='btn btn-hapus btn-sm' href = '../.././controller/admin/hapus/hapus_user.php?id=".$data['id_user']."'><i class='fa-solid fa-trash fs-6'></i></a>";
+                echo "<a class='btn btn-hapus btn-sm' href='#' onclick='confirmDelete(\"../.././controller/admin/hapus/hapus_user.php?id=".$data['id_user']."\")'><i class='fa-solid fa-trash fs-6'></i></a>";
                 echo "</td>";
                 echo "</tr>";
 
@@ -139,6 +156,23 @@ $query = mysqli_query($koneksi, $sql);
             }
             window.location.href = url;
         });
+
+        function confirmDelete(deleteUrl) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda tidak akan bisa mengembalikan data ini!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = deleteUrl;
+            }
+        });
+    }
     </script>
 </div>
 </body>

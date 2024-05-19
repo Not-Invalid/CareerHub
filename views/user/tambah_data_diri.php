@@ -45,7 +45,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     <div class="container">
         <header>Data Diri</header>
 
-        <form action="#">
+        <form action="../.././controller/user/tambah/add_data_diri.php" method="post">
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Tambah Data Diri</span>
@@ -128,10 +128,10 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
                     </div>
                 </div>
 
-                <<div class="button">
+                <div class="button">
 
                     <div class="buttons">        
-                        <button type="submit" name="#" class="navBtn">
+                        <button type="submit" name="tambah" class="navBtn">
                             <span class="btnText">Tambah Data</span>
                             <i class="fas fa-save"></i>
                         </button>

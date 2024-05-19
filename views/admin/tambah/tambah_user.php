@@ -22,7 +22,10 @@
           <input type="text" id="nisn" name="nisn">
 
           <label for="password">Password</label>
+          <div class="password-input">
           <input type="password" id="password" name="password">
+          <i id="password-toggle-icon" class="fas fa-eye-slash toggle-password" onclick="togglePassword()"></i>
+          </div>
 
           <label for="nama_role">Roles</label>
             <select name="id_role" id="id_role">
@@ -46,7 +49,21 @@
        </form>
         </div>
       </div>
-      
       <script src="../../../assets/js/sidebar.js"></script>
+      <script>
+            function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        var passwordIcon = document.getElementById("password-toggle-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove("fa-eye-slash");
+            passwordIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("fa-eye");
+            passwordIcon.classList.add("fa-eye-slash");
+        }
+    }
+      </script>
     </body>
 </html>

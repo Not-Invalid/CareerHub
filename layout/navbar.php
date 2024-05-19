@@ -21,7 +21,7 @@
     <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark p-0">
-                <img src="assets/img/Asset1.png" class="logo-pic">
+                <img src="assets/img/ch_logo.png" class="logo-pic">
                 <a href="index.html" class="navbar-brand">
                     <h1 class="text-white">Career<span class="text-dark"></span>Hub</h1>
                 </a>

@@ -119,6 +119,22 @@
     text-shadow: 0 1px 0 rgba(255,255,255,0.2);
     border-radius: 100%;
   }
+  .password-input {
+    position: relative;
+    width: 100%;
+}
+
+.password-input input[type="password"] {
+    padding-right: 30px; 
+}
+
+.password-input .toggle-password {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
   
   @media screen and (min-width: 480px) {
   

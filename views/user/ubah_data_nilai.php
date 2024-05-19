@@ -13,7 +13,8 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     WHERE siswa.nisn='$nisn'");
 
     $data = mysqli_fetch_array($query);
-    $nisn = $data['nisn'];    
+    $nisn = $data['nisn']; 
+    $id_nilai_semester = $data['id_nilai_semester'];   
     $nilai_semester_1 = $data['nilai_semester_1'];
     $nilai_semester_2 = $data['nilai_semester_2'];
     $nilai_semester_3 = $data['nilai_semester_3'];
@@ -31,7 +32,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../.././assets/css/user/datadiri.css">
+    <link rel="stylesheet" href="../.././assets/css/user/dataNilai.css">
     <link rel="stylesheet" href="../.././assets/css/sidebar.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>CareerHub</title>
@@ -40,12 +41,15 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     <div class="container">
         <header>Data Nilai</header>
 
-        <form action="#">
+        <form action="../.././controller/user/ubah/ubah_data_nilai.php" method="post">
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Ubah Data Nilai</span>
 
                     <div class="fields">
+                        <input type="hidden" name="id_nilai_semester" value="<?php echo $id_nilai_semester; ?>">
+                        <input type="hidden" name="nisn" value="<?php echo $nisn; ?>">
+
                         <div class="input-field-nilai">
                             <label for="nilai_semester_1">Semester 1</label>
                             <input type="number" id="nilai_semester_1" name="nilai_semester_1" value="<?php echo $nilai_semester_1; ?>" required step="0.01">

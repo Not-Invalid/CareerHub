@@ -22,7 +22,7 @@
     <nav class="nav">
       <div>
         <a href="../../views/admin/index.php" class="nav_logo">
-          <img src="../../assets/img/Asset1.png" class="nav_logo-img">
+          <img src="../../assets/img/ch_logo.png" class="nav_logo-img">
           <span class="nav_logo-name">CareerHub</span>
         </a>
         <div class="nav_list">
@@ -31,12 +31,12 @@
             <span class="nav_name">Dashboard</span>
           </a>
           <a href="../../views/user/data_diri.php" class="nav_link">
-            <i class='fas fa-users nav_icon'></i>
+            <i class='fas fa-user nav_icon'></i>
             <span class="nav_name">Data Diri</span>
           </a>
           <a href="../../views/user/data_nilai.php" class="nav_link">
             <i class='fas fa-book nav_icon'></i>
-            <span class="nav_name">Data Nilai</span>
+            <span class="nav_name"> Data Nilai</span>
           </a>
         </div>
       </div>
@@ -47,7 +47,6 @@
     </nav>
   </div>
 
-  <script src="../../assets/js/sidebar.js"></script>
 </body>
 
 </html>

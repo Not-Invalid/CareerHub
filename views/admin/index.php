@@ -28,13 +28,33 @@ $data = array_values($tujuanKarir);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>CareerHub | Admin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="../../assets/vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/vendor/js/bootstrap.bundle.min.js" rel="stylesheet">
     <link href="../.././assets/css/admin/style.css" rel="stylesheet">
     <link href="../.././assets/css/sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="../.././assets/css/sweetalert2.min.css">
+    <script src="../.././assets/js/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+<?php if (isset($_GET['status'])): ?>
+    <?php 
+        if ($_GET['status'] == 'suksesLogin') {
+            echo '<script>
+                    Swal.fire({
+                        position: "center",
+                        iconHtml: \'<i class="fas fa-hand-paper"></i>\',
+                        customClass: {
+                            icon: "no-border"
+                        },
+                        title: "Selamat Datang",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    </script>';
+        } 
+    ?>
+<?php endif;?>
 
 <div class="grid-container">
     <main class="main-container">
