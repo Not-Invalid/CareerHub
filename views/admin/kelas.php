@@ -2,8 +2,8 @@
 include '../../config/koneksi.php';
 include '../../layout/sidebar.php';
 
-$entriesPerPage = isset($_GET['entries']) ? $_GET['entries'] : 10;
-$page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+$entriesPerPage = isset($_GET['entries']) ? intval($_GET['entries']) : 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
 $start = ($page - 1) * $entriesPerPage;
 
 $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'nama_kelas';
@@ -38,11 +38,12 @@ $totalPages = ceil($totalRows / $entriesPerPage);
     <header>
         <div class="filterEntries">
             <div class="entries">
-                Show <select name="" id="table_size">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                Show 
+                <select name="entries" id="table_size">
+                    <option value="10" <?php if ($entriesPerPage == 10) echo 'selected'; ?>>10</option>
+                    <option value="20" <?php if ($entriesPerPage == 20) echo 'selected'; ?>>20</option>
+                    <option value="50" <?php if ($entriesPerPage == 50) echo 'selected'; ?>>50</option>
+                    <option value="100" <?php if ($entriesPerPage == 100) echo 'selected'; ?>>100</option>
                 </select> entries
             </div>
             <div class="filter">
@@ -112,13 +113,13 @@ $totalPages = ceil($totalRows / $entriesPerPage);
         </thead>
         <tbody class="userInfo">
         <?php
-            $no = 1;
+            $no = $start + 1;
             while ($data = mysqli_fetch_array($query)) {
                 echo "<tr>";
                 echo "<td>" . $no . "</td>";
                 echo "<td>" . $data['nama_kelas'] . "</td>";
-                echo "<td width = '160'>";
-                echo "<a class='btn btn-ubah btn-sm ' href='ubah/ubah_kelas.php?id=".$data['id_kelas']."'> <i class='fa-solid fa-pen-to-square fs-6'></i></a> ";
+                echo "<td width='160'>";
+                echo "<a class='btn btn-ubah btn-sm' href='ubah/ubah_kelas.php?id=".$data['id_kelas']."'> <i class='fa-solid fa-pen-to-square fs-6'></i></a> ";
                 echo "<a class='btn btn-hapus btn-sm' href='#' onclick='confirmDelete(\"../.././controller/admin/hapus/hapus_kelas.php?id=".$data['id_kelas']."\")'><i class='fa-solid fa-trash fs-6'></i></a>";
                 echo "</td>";
                 echo "</tr>";
@@ -129,8 +130,14 @@ $totalPages = ceil($totalRows / $entriesPerPage);
         </tbody>
     </table>
     <footer>
-        <span class="showEntries">Menampilkan Data <?php echo mysqli_num_rows($query); ?> Dari Total <?php echo mysqli_num_rows($query); ?> Data</span>
-        <div class="pagination" data-totalpages="<?php echo $totalPages; ?>" data-currentpage="<?php echo $page; ?>"></div>
+        <span class="showEntries">Menampilkan Data <?php echo mysqli_num_rows($query); ?> Dari Total <?php echo $totalRows; ?> Data</span>
+        <div class="pagination" data-totalpages="<?php echo $totalPages; ?>" data-currentpage="<?php echo $page; ?>">
+            <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    echo "<a href='?page=$i&entries=$entriesPerPage&search=".urlencode($search)."'>$i</a> ";
+                }
+            ?>
+        </div>
     </footer>
     
     <script src="../.././assets/js/sidebar.js"></script>
@@ -138,30 +145,40 @@ $totalPages = ceil($totalRows / $entriesPerPage);
     <script>
         document.getElementById('search').addEventListener('input', function() {
             var search = this.value.trim();
-            var url = window.location.href.split('?')[0];
+            var params = new URLSearchParams(window.location.search);
             if (search !== '') {
-                url += '?search=' + search;
+                params.set('search', search);
+            } else {
+                params.delete('search');
             }
-            window.location.href = url;
+            params.set('page', 1);
+            window.location.search = params.toString();
         });
 
+        document.getElementById('table_size').addEventListener('change', function() {
+            var entries = this.value;
+            var params = new URLSearchParams(window.location.search);
+            params.set('entries', entries);
+            params.set('page', 1);
+            window.location.search = params.toString();
+        });
 
         function confirmDelete(deleteUrl) {
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: 'Anda tidak akan bisa mengembalikan data ini!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = deleteUrl;
-            }
-        });
-    }
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Anda tidak akan bisa mengembalikan data ini!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = deleteUrl;
+                }
+            });
+        }
     </script>
 </div>
 </body>

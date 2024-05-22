@@ -1,8 +1,6 @@
 <?php
-include '../../config/koneksi.php';
-include '../../layout/user_sidebar.php';
-
-session_start();
+include '../.././config/koneksi.php';
+session_start(); 
 
 if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
     $nisn = $_SESSION['nisn'];
@@ -32,122 +30,176 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../.././assets/css/user/tambahdata.css">
-    <link rel="stylesheet" href="../.././assets/css/sidebar.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <title>CareerHub</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="../.././assets/css/user/ubah_data_diri.css">
+    <link rel="stylesheet" href="../.././assets/vendor/css/bootstrap.min.css">    
+
 </head>
+
 <body>
-    <div class="container">
-        <header>Data Diri</header>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form id="form" action="../.././controller/user/tambah/add_data_diri.php" method="post">
+                <ul id="progressbar">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <fieldset>
+                    <h2 class="fs-title">Data Diri</h2>
+                    <h3 class="fs-subtitle">Isi Data Diri Dengan Baik dan Benar</h3>
+                    <label>NISN</label>
+                    <input type="text" name="nisn" value="<?php echo $nisn;?>" readonly/>
+                    <label>Nama Siswa</label>
+                    <input type="text" name="nama_siswa"/>
+                    <label>Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir"/>
+                    <input type="button" name="next" class="next action-button" value="Selanjutnya" />
+                </fieldset>
+                <fieldset>
+                    <h2 class="fs-title">Data Diri</h2>
+                    <h3 class="fs-subtitle">Isi Data Diri Dengan Baik dan Benar</h3>
+                    <label>Jenis Kelamin</label>
+                    <select name="jenis_kelamin">
+                        <option value="" disabled selected hidden></option>
+                        <option value="Laki Laki">Laki Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                    <label>Alamat</label>
+                    <input type="text" name="alamat"/>
+                    <label>No Telepon</label>
+                    <input type="text" name="no_telp"/>
+                    <input type="button" name="previous" class="previous action-button-previous" value="Sebelumnya" />
+                    <input type="button" name="next" class="next action-button" value="Selanjutnya" />
+                </fieldset>
+                <fieldset>
+                    <h2 class="fs-title">Data Diri</h2>
+                    <h3 class="fs-subtitle">Isi Data Diri Dengan Baik dan Benar</h3>
+                    <label>Jurusan</label>
+                    <select name="kode_jurusan" id="kode_jurusan">
+                        <?php
+                        include '../../../config/koneksi.php';
+                        $query_jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
+                        while($data_jurusan = mysqli_fetch_array($query_jurusan)) {
+                            $selected = ($data_jurusan['kode_jurusan'] == $data['kode_jurusan']) ? 'selected' : '';
+                        ?>
+                        <option value="<?=$data_jurusan['kode_jurusan'];?>" <?php echo $selected; ?>><?php echo $data_jurusan['nama_jurusan'];?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <label>Kelas</label>
+                    <select name="id_kelas" id="id_kelas">
+                        <?php
+                        $query_kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
+                        while($data_kelas = mysqli_fetch_array($query_kelas)) {
+                            $selected = ($data_kelas['id_kelas'] == $data['id_kelas']) ? 'selected' : '';
+                        ?>
+                        <option value="<?=$data_kelas['id_kelas'];?>" <?php echo $selected; ?>><?php echo $data_kelas['nama_kelas'];?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <label>Tujuan Karir</label>
+                    <select name="id_karir" id="id_karir">
+                        <?php
+                        $query_karir = mysqli_query($koneksi, "SELECT * FROM karir");
+                        while($data_karir = mysqli_fetch_array($query_karir)) {
+                            $selected = ($data_karir['id_karir'] == $data['id_karir']) ? 'selected' : '';
+                        ?>
+                        <option value="<?=$data_karir['id_karir'];?>" <?php echo $selected; ?>><?php echo $data_karir['tujuan_karir'];?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <input type="button" name="previous" class="previous action-button-previous" value="Sebelumnya" />
+                    <input type="submit" value="Simpan Data" class="submit action-button" name="tambah">
+                </fieldset>
+            </form>
+        </div>
+    </div>
 
-        <form action="../.././controller/user/tambah/add_data_diri.php" method="post">
-            <div class="form first">
-                <div class="details personal">
-                    <span class="title">Tambah Data Diri</span>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script>
+    var current_fs, next_fs, previous_fs;
+    var left, opacity, scale;
+    var animating;
 
-                    <div class="fields">
-                        <div class="input-field">
-                            <label for="nisn">NISN</label>
-                            <input type="text" id="nisn" name="nisn" value="<?php echo $nisn; ?>" readonly>
-                        </div>
+    $(".next").click(function() {
+        if (animating) return false;
+        animating = true;
 
-                        <div class="input-field">
-                            <label for="nama_siswa">Nama Siswa</label>
-                            <input type="text" id="nama_siswa" name="nama_siswa" required>
-                        </div>
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
 
-                        <div class="input-field">
-                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
-                        </div>
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
-                        <div class="input-field">
-                            <label for="jenis_kelamin">Jenis Kelamin</label>
-                            <input type="text" id="jenis_kelamin" name="jenis_kelamin" required>
-                        </div>
+        next_fs.show();
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now, mx) {
+                scale = 1 - (1 - now) * 0.2;
+                left = (now * 50) + "%";
+                opacity = 1 - now;
+                current_fs.css({
+                    'transform': 'scale(' + scale + ')',
+                    'position': 'absolute'
+                });
+                next_fs.css({
+                    'left': left,
+                    'opacity': opacity
+                });
+            },
+            duration: 800,
+            complete: function() {
+                current_fs.hide();
+                animating = false;
+            },
+            easing: 'easeInOutBack'
+        });
+    });
 
-                        <div class="input-field">
-                            <label for="alamat">Alamat</label>
-                            <input type="text" id="alamat" name="alamat" required>
-                        </div>
+    $(".previous").click(function() {
+        if (animating) return false;
+        animating = true;
 
-                        <div class="input-field">
-                            <label for="no_telp">No. Telepon</label>
-                            <input type="text" id="no_telp" name="no_telp" required>
-                        </div>
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
 
-                        <div class="input-field">
-                            <label for="jurusan">Jurusan</label>
-                            <select name="kode_jurusan" id="kode_jurusan">
-                                <?php
-                                    include '../../../config/koneksi.php';
-                                    $query = mysqli_query($koneksi, "SELECT * FROM jurusan");
-                                    while($data = mysqli_fetch_array($query)) {
-                                ?>
-                                    <option value="<?=$data['kode_jurusan'];?>"><?php echo $data['nama_jurusan'];?></option>
-                                    <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 
-                        <div class="input-field">
-                            <label for="kelas">Kelas</label>
-                            <select name="id_kelas" id="id_kelas">
-                                <?php
-                                    include '../../../config/koneksi.php';
-                                    $query = mysqli_query($koneksi, "SELECT * FROM kelas");
-                                    while($data = mysqli_fetch_array($query)) {
-                                ?>
-                                    <option value="<?=$data['id_kelas'];?>"><?php echo $data['nama_kelas'];?></option>
-                                    <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
+        previous_fs.show();
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now, mx) {
+                scale = 0.8 + (1 - now) * 0.2;
+                left = ((1 - now) * 50) + "%";
+                opacity = 1 - now;
+                current_fs.css({
+                    'left': left
+                });
+                previous_fs.css({
+                    'transform': 'scale(' + scale + ')',
+                    'opacity': opacity
+                });
+            },
+            duration: 800,
+            complete: function() {
+                current_fs.hide();
+                animating = false;
+            },
+            easing: 'easeInOutBack'
+        });
+    });
 
-                        <div class="input-field">
-                            <label for="tujuan_karir">Tujuan Karir</label>
-                            <select name="id_karir" id="id_karir">
-                                <?php
-                                    include '../../../config/koneksi.php';
-                                    $query = mysqli_query($koneksi, "SELECT * FROM karir");
-                                    while($data = mysqli_fetch_array($query)) {
-                                ?>
-                                    <option value="<?=$data['id_karir'];?>"><?php echo $data['tujuan_karir'];?></option>
-                                    <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button">
-
-                    <div class="buttons">        
-                        <button type="submit" name="tambah" class="navBtn">
-                            <span class="btnText">Tambah Data</span>
-                            <i class="fas fa-save"></i>
-                        </button>
-
-
-                        <a href="data_diri.php" class="navBtn">
-                            <span class="btnText">Batal</span>
-                            <i class="fas fa-xmark"></i>
-                        </a>
-                    </div>
-                </div>  
-
-            </div>
-        </form>
-
-    <script src="../.././assets/js/data.js"></script>
-    
+    </script>
 </body>
 </html>
