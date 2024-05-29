@@ -1,6 +1,5 @@
 <?php
 include '../../../config/koneksi.php';
-include '../../../layout/sidebar.php';
 
 if (isset($_GET['id'])) {
     $kode_jurusan = $_GET['id'];
