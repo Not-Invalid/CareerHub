@@ -1,19 +1,21 @@
 <?php
-include "../../../config/koneksi.php";
+include '../../../config/koneksi.php';
+
 if (isset($_POST['tambah'])) {
-    $id_kelas = $_POST['id_kelas'];
-    $nama_kelas = $_POST['nama_kelas'];
+    $namaKelasArray = $_POST['nama_kelas'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO kelas(id_kelas, nama_kelas) 
-    VALUES ('$id_kelas', '$nama_kelas')");
-    
+    foreach ($namaKelasArray as $namaKelas) {
+        $sql = "INSERT INTO kelas (nama_kelas) VALUES ('$namaKelas')";
+        if (!mysqli_query($koneksi, $sql)) {
+            echo "Error: " . $sql . "<br>" . mysqli_error($koneksi);
+        }
+    }
 
-if ($query) {
+    mysqli_close($koneksi);
     header('location:../../../views/admin/kelas.php?status=Sukses');
+    exit;
 } else {
-    header('location:../../../views/admin/kelas.php?status=gagal');
-}
-} else {
-    die ("Akses dilarang...");
+    header('location:../../../views/admin/karir.php?status=gagal');
+    exit;
 }
 ?>
