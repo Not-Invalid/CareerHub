@@ -1,6 +1,4 @@
 <?php
-include '../../.././config/koneksi.php';
-
 if (isset($_GET['id'])) {
     $nisn = $_GET['id'];
     $query = mysqli_query($koneksi, "SELECT siswa.*, jurusan.nama_jurusan, karir.tujuan_karir, kelas.nama_kelas,
