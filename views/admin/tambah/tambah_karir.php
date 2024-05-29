@@ -1,7 +1,3 @@
-<?php 
-    include '../../../layout/sidebar.php'
-?>
-
 <html>
     <head>
         <meta charset="utf-8">
