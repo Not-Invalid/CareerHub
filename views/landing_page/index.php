@@ -41,7 +41,7 @@
                     <h1 class="display-8 text-white mb-4 animated slideInRight">Platform Karier untuk memantau prestasi akademis dan pendataan diri Siswa.</h1>
                     <p class="text-white mb-4 animated slideInRight">Aplikasi ini dirancang untuk memfasilitasi Anda dalam memantau nilai serta mempermudah perjalanan pendidikan Anda menuju jenjang yang lebih tinggi.</p>
                     <a href="#about" class="btn btn-light py-sm-2 px-sm-3 rounded-pill me-1 animated slideInRight">Read More</a>
-                    <a href="partials/register.php" class="btn btn-outline-light py-sm-2 px-sm-3 rounded-pill animated slideInRight">Get Started</a>
+                    <a href="partials/login.php" class="btn btn-outline-light py-sm-2 px-sm-3 rounded-pill animated slideInRight">Get Started</a>
                 </div>
                 <div class="col-lg-6 align-self-end text-center text-lg-end">
                     <img class="img-fluid" src="assets/img/header-img.png" alt="">
