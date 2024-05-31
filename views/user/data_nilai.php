@@ -27,37 +27,6 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
 }
 ?>
 
-<?php if (isset($_GET['status'])): ?>
-            <?php 
-                if (isset($_GET['status'])) {
-                    if ($_GET['status'] == 'Sukses') {
-                        echo '<script>
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: "Data berhasil ditambahkan",
-                                    text: "Menunggu Persetujuan",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                              </script>';
-                    } 
-                    if ($_GET['status'] == 'ubah') {
-                        echo '<script>
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: "Data berhasil diubah",
-                                    text: "Menunggu Persetujuan",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                              </script>';
-                    } 
-                }
-            ?>
-        <?php endif;?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,6 +168,37 @@ if(isset($_SESSION['status']) && $_SESSION['status'] === "login") {
         }
     });
     </script>
+
+<?php if (isset($_GET['status'])): ?>
+            <?php 
+                if (isset($_GET['status'])) {
+                    if ($_GET['status'] == 'Sukses') {
+                        echo '<script>
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Data berhasil ditambahkan",
+                                    text: "Menunggu Persetujuan",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                              </script>';
+                    } 
+                    if ($_GET['status'] == 'ubah') {
+                        echo '<script>
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Data berhasil diubah",
+                                    text: "Menunggu Persetujuan",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                              </script>';
+                    } 
+                }
+            ?>
+        <?php endif;?>
 
 </body>
 </html> 
