@@ -44,12 +44,12 @@ class Pdf extends FPDF
     {
         $this->SetFont('Arial', '', 12);
 
-        $this->SetFont('Arial', 'BI', 12);
+        $this->SetFont('Arial', 'B', 12);
         $this->SetX(35);
         $this->Cell(50, 18, 'Kelas', 1, 0, 'C');
         $this->Cell(90, 12, 'Minat Karir', 1, 1, 'C');
 
-        $this->SetFont('Arial', 'BI', 10);
+        $this->SetFont('Arial', 'B', 10);
         $this->SetX(35);
         $this->Cell(50, 6, '', 0, 0);
         $this->Cell(30, 6, 'Bekerja', 1, 0, 'C');
