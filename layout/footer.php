@@ -21,7 +21,7 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-center mb-3 mb-md-0">
-                        &copy; <a class="" href="#">CareerHub</a>, All Right Reserved.
+                        &copy; <span class="">CareerHub</span>, All Right Reserved.
 
                         Designed By <span class="copyright-text">Kelompok 7</span>
                     </div>
